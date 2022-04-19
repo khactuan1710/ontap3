@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <% include header.ejs %>
+</head>
+<body class="container">
+<form action="/Find" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="text" placeholder="Tim kiem" name="timKiem">
+    <button>Tim kiem</button>
+    <p>==================================</p>
+</form>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+    <% for(var i = 0; i < data.length;i++) { %>
+        <p>id: <%= data[i]._id %></p>
+        <p>nhan hieu: <%= data[i]._nhanhieu %></p>
+        <p>nam: <%= data[i]._namsx %></p>
+        <p>ngay: <%= data[i]._ngaynhap %></p>
+        <p>gia: <%= data[i]._gia %></p>
+        <div class="col-md-4">
+            <div class="card mb-10 box-shadow">
+                <% if (data[i]._image != null){ %>
+                <img src="./images/<%= data[i]._image %>" alt="" style="width: 100px" ; height="60px">
+            </div>
+        </div>
+        <% } %>
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+            <button onclick="Xoa(<%= JSON.stringify(data[i]._id) %>)">Xoa</button>
+            <a href="/update">
+                <button onclick="Sua(<%= JSON.stringify(data[i]._id) %>)">Sua</button>
+            </a>
+                </div>
+            </div>
+        </div>
+        <p>=============================</p>
+    <% } %>
+        </div>
+    </div>
+</div>
+<script>
+    const Xoa = (id) => {
+        const data = {id: id};
+        if (confirm("xoa")) {
+            (async () => {
+                const rawResponse = await fetch('http://localhost:3000/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                const content = await rawResponse.json();
+                console.log(content.trangThai);
+                if (content.trangThai == 0) {
+                    location.reload();
+                }
+            })();
+        }
+    }
+    //
+    const Sua = (id) => {
+        localStorage.setItem("_id", id);
+        console.log(localStorage.getItem("_id"));
+    }
+    //
+</script>
+</body>
+</html>

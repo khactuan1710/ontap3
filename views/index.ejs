@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% include header.ejs %>
+  </head>
+  <body class="container">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form style="padding-bottom: 20px" method="POST" action="/add" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="ten" class="form-label">ID Oto: </label>
+        <input type="text" class="form-control" id="_id" name="_id">
+      </div>
+      <div class="mb-3">
+        <label for="ten" class="form-label">Nhãn hiệu: </label>
+        <input type="text" class="form-control" id="_nhanhieu" name="_nhanhieu" >
+      </div>
+      <div class="mb-3">
+        <label for="sdt" class="form-label">Năm sản xuất:</label>
+        <input type="text" class="form-control" id="_namsx" name="_namsx">
+      </div>
+      <div class="mb-3">
+        <label for="sdt" class="form-label">Ngày nhập:</label>
+        <input type="date" class="form-control" id="_ngaynhap" name="_ngaynhap">
+      </div>
+      <div class="mb-3">
+        <label for="sdt" class="form-label">Giá bán:</label>
+        <input type="text" class="form-control" id="_gia" name="_gia">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">tải file lên</label>
+        <input class="form-control form-control-sm"  type="file" name="profile_pic"  accept="image/jpeg"/>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/List">
+      <button type="submit" class="btn btn-primary">Danh sách</button>
+    </a>
+  </body>
+</html>

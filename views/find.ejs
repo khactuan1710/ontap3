@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div><%= message %></div>
+<div>
+    <% if (data != null){ %>
+        <p><%= data._id %></p>
+        <p><%= data._nhanhieu %></p>
+        <p><%= data._namsx %></p>
+        <p><%= data._ngaynhap %></p>
+        <p><%= data._gia %></p>
+        <img src="./images/<%= data._image %>" alt="" style="width: 100px" ; height="60px">
+    <% } %>
+</div>
+
+</body>
+</html>

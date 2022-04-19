@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <% include header.ejs %>
+</head>
+<body class="container">
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+    <div style="padding-bottom: 20px" >
+        <div class="mb-3">
+            <label for="ten" class="form-label">ID Oto: </label>
+            <input type="text" class="form-control" id="_id" name="_id">
+        </div>
+        <div class="mb-3">
+            <label for="ten" class="form-label">Nhãn hiệu: </label>
+            <input type="text" class="form-control" id="_nhanhieu" name="_nhanhieu" >
+        </div>
+        <div class="mb-3">
+            <label for="sdt" class="form-label">Năm sản xuất:</label>
+            <input type="text" class="form-control" id="_namsx" name="_namsx">
+        </div>
+        <div class="mb-3">
+            <label for="sdt" class="form-label">Ngày nhập:</label>
+            <input type="date" class="form-control" id="_ngaynhap" name="_ngaynhap">
+        </div>
+        <div class="mb-3">
+            <label for="sdt" class="form-label">Giá bán:</label>
+            <input type="text" class="form-control" id="_gia" name="_gia">
+        </div>
+              <div class="mb-3">
+                <label for="formFileSm" class="form-label">tải file lên</label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" name="_image" multiple accept="image/jpeg">
+              </div>
+        <button onclick="updateSt()" class="btn btn-primary">Submit</button>
+    </div>
+</body>
+<script>
+    const id = localStorage.getItem("_id");
+    //
+    const txtid = document.getElementById("_id");
+    const txtNhanhieu = document.getElementById("_nhanhieu");
+    const txtNamSx = document.getElementById("_namsx");
+    const txtNgayNhap = document.getElementById("_ngaynhap");
+    const txtgia = document.getElementById("_gia");
+    const data = {_id: id};
+    (async () => {
+        const rawResponse = await fetch('http://localhost:3000/getOto', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const content = await rawResponse.json();
+        console.log(content.data, 'data update');
+        txtid.value = content.data._id;
+        txtNhanhieu.value = content.data._nhanhieu;
+        txtNamSx.value = content.data._namsx;
+        txtNgayNhap.value = content.data._ngaynhap;
+        txtgia.value = content.data._gia;
+    })();
+    //
+
+    const updateSt = () => {
+        // const data = {_id: id, _nhanhieu:txtNhanhieu.value, _namsx: txtNamSx.value, _ngaynhap:txtNgayNhap.value, _gia: txtgia.value};
+        // (async () => {
+        //     const rawResponse = await fetch('http://localhost:3000/Update', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(data)
+        //     });
+        //     const content = await rawResponse.json();
+        //     if (content.trangThai ==0){
+        //         alert("Update thanh cong!");
+        //         window.location="http://localhost:3000/list";
+        //     }else {
+        //         alert("Update that bai!");
+        //     }
+        // })();
+    }
+</script>
+</html>
